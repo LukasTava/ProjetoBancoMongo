@@ -6,7 +6,8 @@ const livroEsquema = new mongoose.Schema(
         titulo: {type: String, required:true},
         autor: {type:mongoose.Schema.Types.ObjectId, ref:'autores', required:true},
         editora: {type:String, required:true},
-        ISBN: {type:Number}
+        ISBN: {type:String, required:true},
+        Valor: {type:Number, required:true}
     }
 );
 
