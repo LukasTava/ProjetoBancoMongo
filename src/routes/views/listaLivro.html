@@ -29,12 +29,10 @@
         <h2>Lista de Livros Cadastrados</h2>
 
         <ul>
-         {% for Livros in livraria %}
-             <li><a href="{% url 'listarLivros  ' Livro.id %}"> Nome: {{ Livro.titulo }}, Autor: {{ Livro.Autor.Nome }}, Editora: {{ Livro.editora }}, ISBN: {{ Livro.ISBN }}, Valor: R$ {{ Livro.valor }}</a></li>
-         {% endfor %}
-         </ul>
+             <li><a href="/livros"> Nome: {{ Livro.titulo }}, Autor: {{ Livro.Autor.Nome }}, Editora: {{ Livro.editora }}, ISBN: {{ Livro.ISBN }}, Valor: R$ {{ Livro.valor }}</a></li>
+        </ul>
     
-        <button><a href="{% url 'url_home' %}"> PÁGINA INICIAL </a></button>
+        <button><a href="/"> PÁGINA INICIAL </a></button>
     </div>
   </div>
 </body>

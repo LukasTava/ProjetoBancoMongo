@@ -26,19 +26,14 @@
   </div>
 </nav>
     <div class="jumbotron"  style="padding:40px;">
-<H2>Cadastro de Pets</H2>
-<form method="POST">
+        <h2>Lista de Autores Cadastrados</h2>
 
-    {% csrf_token %}
-
-    {{ form.as_p }}
-
-    <button type="submit"> SALVAR </button>
-    {% if livro %}
-    <button><a href="{% url 'url_delete_pet' livro.id %}">REMOVER</a></button>
-    {% endif %}
-</form>
-</div>
-</div>
+        <ul>
+             <li><a href="/livros"> Nome: {{ Autor.nome }}, Nacionalidade: {{ Autor.nacionalidade }}</a></li>
+        </ul>
+    
+        <button><a href="/"> PÁGINA INICIAL </a></button>
+    </div>
+  </div>
 </body>
 </html>
