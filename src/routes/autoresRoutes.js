@@ -6,7 +6,7 @@ const router = express.Router();
 router 
     .get('/autores', AutorController.listarAutores)
     .get('/autores/:id', AutorController.listarAutorPorId)
-    .post('/autores', AutorController.cadastrarAutor)
+    .post('/addAutor', AutorController.cadastrarAutor)
     .put('/autores/:id', AutorController.atualizarAutor)
     .delete('/autores/:id', AutorController.deletarAutor)
 

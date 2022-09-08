@@ -1,4 +1,9 @@
 import livros from "../models/Livro.js";
+import exports from "express"
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+import db from "../banco/db"
+import redis from "../banco/db"
 
 class LivroController {
 
@@ -12,16 +17,17 @@ class LivroController {
 
   static listarLivroPorId = (req, res) => {
     const id = req.params.id;
-
     livros.findById(id, (err, livros) => {
       if(err) {
         res.status(400).send({message: `${err.message} - Id do livro não localizado.`})
       } else {
-        res.status(200).send(livros);
-      }
-    })
+        access.buscarLivroCache(db, redis, req.param('id'), function (Livro) {
+          if (!text) res.status(500).send("Erro Servidor");
+          else res.status(200).send(livros);
+        })
+    }}
   }
-
+  
   static cadastrarLivro = (req, res) => {
     let livro = new livros(req.body);
 
@@ -57,8 +63,27 @@ class LivroController {
         res.status(500).send({message: err.message})
       }
     })
-  }
-
+  } 
 }
+
+module.exports.buscarLivroCache = function (db, redis, Livro, callback) {
+  redis.get(Livro, function (err, reply) {
+      if (err) callback(null);
+      else if (reply) 
+      callback(JSON.parse(reply));
+      else {
+          db.collection('titulo').findOne({
+              Livro: livros
+          }, function (err, doc) {
+              if (err || !doc) callback(null);
+              else {
+                  redis.set(title, JSON.stringify(doc), function () {
+                      callback(doc);
+                  });
+              }
+          });
+      }
+  });
+};
 
 export default LivroController;

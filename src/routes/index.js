@@ -17,11 +17,11 @@ const routes = (app) => {
     )
 
     app.get('/',(req,res) => {
-        res.sendFile('src/routes/views/index.html', { root: '.' })
+        res.sendFile('src/views/index.html', { root: '.' })
     });
 
     app.get('/listaLivros', (req, res) =>{
-        res.sendFile('src/routes/views/listaLivro.html', {root: '.'})
+        res.sendFile('src/views/listaLivro.html', {root: '.'})
     })
 
       

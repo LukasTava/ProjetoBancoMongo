@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-  "root":"/",
+  "root": "/",
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,11 +13,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.0",
     "bootstrap": "^5.2.0",
+    "ejs": "^3.1.8",
     "express": "^4.18.1",
     "express-handlebars": "^6.0.6",
     "handlebars": "^4.7.7",
     "mongoose": "^6.5.1",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "redis": "^4.3.1"
   }
 }
