@@ -8,6 +8,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const bodyParser = require('body-parser')
+const ejs = require('ejs')
+import livros from "./models/Livro.js";
 
 const __dirname = path.dirname(__filename);
 
@@ -18,26 +20,31 @@ db.once("open", () => {
 
 const app = express();
 
+app.set('views', path.join(__dirname, 'views'));
+
 app.use(express.json());
 
-app.set('view engine', '.hbs');
-
-app.use(express.static('public'));
-
-app.set('views' , path.join(__dirname , 'views'));
-
-app.engine('.hbs', exphbs.engine({
-   defaultLayout: 'main',
-   layoutsDir: path.join(app.get('views'),'layouts'),
-   partialsDir: path.join(app.get('views'),'partials'),
-   extname: '.hbs'
-}));
-
+app.set('view engine', 'ejs');
 
 app.get('/', function(req, res){
-   res.render('index')
+   livros.find({}, function(err, livro){
+      res.render('index.ejs', {
+         listaLivros: livro
+      })
+   })
 })
 
+app.get('/livro/:id', function(req, res){
+   livros.findById({}, function(err, livro){
+      res.render('edit.ejs', {
+         livro:livro
+      })
+   })
+})
+
+app.get('/CadastraLivro', function(req, res){
+      res.render('form.ejs')
+})
 
 
 routes(app);
